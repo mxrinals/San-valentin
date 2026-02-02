@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      padding: 40px;
+    }
+
+    h1 {
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 8px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #mensaje {
+      margin-top: 30px;
+      font-size: 20px;
+      line-height: 1.6;
+      min-height: 120px;
+    }
+
+    iframe {
+      margin-top: 25px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- PANTALLA INICIAL -->
+    <div id="inicio">
+      <h1>Esto no es solo música…</h1>
+      <p>es todo lo que nunca supe cómo decirte 💌</p>
+      <button onclick="mostrarCanciones()">Abrir recuerdos</button>
+    </div>
+
+    <!-- MENÚ DE CANCIONES -->
+    <div id="menu" class="hidden">
+      <h1>Nuestras canciones</h1>
+      <p>Elige una y lee lo que mi corazón guarda</p>
+
+      <!-- BOTONES DE CANCIONES -->
+      <button onclick="reproducir(0)">🎵 Canción 1</button>
+      <button onclick="reproducir(1)">🎵 Canción 2</button>
+      <button onclick="reproducir(2)">🎵 Canción 3</button>
+      <button onclick="reproducir(3)">🎵 Canción 4</button>
+      <button onclick="reproducir(4)">🎵 Canción 5</button>
+
+      <div id="mensaje"></div>
+      <div id="player"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const mensajes = [
+      "Esta canción me recuerda al primer momento en que pensé en ti sin darme cuenta.",
+      "Cada vez que suena, siento calma, como cuando estoy contigo.",
+      "Esta canción aparece cuando te extraño más de lo que digo.",
+      "Si tuviera que explicar lo nuestro, esta canción lo haría mejor que yo.",
+      "Esta canción es mi forma silenciosa de decirte que te amo."
+    ];
+
+    const canciones = [
+      "https://open.spotify.com/embed/track/ID_CANCION_1",
+      "https://open.spotify.com/embed/track/ID_CANCION_2",
+      "https://open.spotify.com/embed/track/ID_CANCION_3",
+      "https://open.spotify.com/embed/track/ID_CANCION_4",
+      "https://open.spotify.com/embed/track/ID_CANCION_5"
+    ];
+
+    function mostrarCanciones() {
+      document.getElementById("inicio").classList.add("hidden");
+      document.getElementById("menu").classList.remove("hidden");
+    }
+
+    function reproducir(index) {
+      escribirMensaje(mensajes[index]);
+      document.getElementById("player").innerHTML =
+        `<iframe src="${canciones[index]}" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media;"></iframe>`;
+    }
+
+    function escribirMensaje(texto) {
+      const contenedor = document.getElementById("mensaje");
+      contenedor.innerHTML = "";
+      let i = 0;
+
+      const intervalo = setInterval(() => {
+        contenedor.innerHTML += texto.charAt(i);
+        i++;
+        if (i >= texto.length) clearInterval(intervalo);
+      }, 45);
+    }
+  </script>
+
+</body>
+</html>
